@@ -41,4 +41,8 @@ public class Intake extends SubsystemBase {
     public void openPiston(){
         piston.set(Constants.PISTON_OPEN);
     }
+
+    public boolean getPistonPosition(){
+        return piston.get();
+    }
 }
