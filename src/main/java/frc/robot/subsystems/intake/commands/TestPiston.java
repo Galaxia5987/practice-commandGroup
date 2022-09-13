@@ -14,9 +14,20 @@ public class TestPiston extends CommandBase {
     }
 
     @Override
-    public void execute() {
-            intake.openPiston();
+    public void initialize() {
+        timer.reset();
+        timer.start();
+    }
 
-            intake.closePiston();
+    @Override
+    public void execute() {
+            if (timer.get()>2){
+                if (!intake.getPistonPosition()){
+                    intake.openPiston();
+                }
+                else{
+                    intake.closePiston();
+                }
+            }
     }
 }
