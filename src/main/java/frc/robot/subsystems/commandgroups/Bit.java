@@ -10,10 +10,10 @@ import frc.robot.subsystems.intake.commands.PickCargo;
 public class Bit extends SequentialCommandGroup {
     public Bit(Intake PickCargo, Conveyor Convey){
         addCommands(
-                new PickCargo(Constants.INTAKE_POWER),
-                new PickCargo(-Constants.INTAKE_POWER),
-                new Convey(Constants.CONVEYOR_POWER),
-                new Convey(-Constants.CONVEYOR_POWER)
+                new PickCargo(Constants.INTAKE_POWER).withTimeout(5),
+                new PickCargo(-Constants.INTAKE_POWER).withTimeout(5),
+                new Convey(Constants.CONVEYOR_POWER).withTimeout(5),
+                new Convey(-Constants.CONVEYOR_POWER).withTimeout(5)
         );
     }
 }
