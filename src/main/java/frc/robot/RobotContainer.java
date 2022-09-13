@@ -8,8 +8,7 @@ import webapp.Webserver;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-    public ExampleSubsystem exampleSubsystem = ExampleSubsystem.getInstance();
-    private final XboxController xbox = new XboxController(Ports.Controls.XBOX);
+    private final XboxController xbox = new XboxController(0);
     private final JoystickButton a = new JoystickButton(xbox, XboxController.Button.kA.value);
 
 
