@@ -3,15 +3,20 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.example.ExampleSubsystem;
+import frc.robot.subsystems.commandgroups.Feed;
+import frc.robot.subsystems.commandgroups.Outtake;
+import frc.robot.subsystems.conveyor.Conveyor;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.valuetuner.ValueTuner;
 import webapp.Webserver;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-    public ExampleSubsystem exampleSubsystem = ExampleSubsystem.getInstance();
-    private final XboxController xbox = new XboxController(Ports.Controls.XBOX);
+    private final Conveyor conveyor = Conveyor.getInstance();
+    private final Intake intake = Intake.getInstance();
+    private final XboxController xbox = new XboxController(0);
     private final JoystickButton a = new JoystickButton(xbox, XboxController.Button.kA.value);
+    private final JoystickButton b = new JoystickButton(xbox, XboxController.Button.kB.value);
 
 
     /**
@@ -31,10 +36,12 @@ public class RobotContainer {
 
     private void configureDefaultCommands() {
 
+
     }
 
     private void configureButtonBindings() {
-
+        a.whileHeld(new Feed(intake ,conveyor));
+        b.whileHeld(new Outtake(intake, conveyor));
     }
 
 
