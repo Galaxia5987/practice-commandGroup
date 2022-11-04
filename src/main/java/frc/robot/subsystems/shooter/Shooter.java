@@ -11,17 +11,17 @@ import frc.robot.subsystems.UnitModel;
 public class Shooter extends SubsystemBase {
     private final WPI_TalonFX leftMotor = new WPI_TalonFX(Ports.ShooterPorts.LEFT_MOTOR);
     private final WPI_TalonFX rightMotor = new WPI_TalonFX(Ports.ShooterPorts.RIGHT_MOTOR);
-    private final UnitModel unitModel = new UnitModel(Constants.TICKS_PER_ROTATION);
+    private final UnitModel unitModel = new UnitModel(Constants.shooterConstants.TICKS_PER_ROTATION);
     private static Shooter INSTANCE;
 
     private Shooter(){
-        leftMotor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
-        leftMotor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
-        leftMotor.setInverted(Constants.CLOCKWISE);
+        leftMotor.configVoltageCompSaturation(Constants.shooterConstants.CONFIG_VOLT_COMP);
+        leftMotor.enableVoltageCompensation(Constants.shooterConstants.ENABLE_VOLT_COMP);
+        leftMotor.setInverted(Constants.shooterConstants.CLOCKWISE);
         leftMotor.setNeutralMode(NeutralMode.Coast);
-        leftMotor.config_kP(0, Constants.kP, Constants.TALON_TIMEOUT);
-        leftMotor.config_kP(0, Constants.kI, Constants.TALON_TIMEOUT);
-        leftMotor.config_kP(0, Constants.kD, Constants.TALON_TIMEOUT);
+        leftMotor.config_kP(0, Constants.shooterConstants.kP, Constants.shooterConstants.TALON_TIMEOUT);
+        leftMotor.config_kP(0, Constants.shooterConstants.kI, Constants.shooterConstants.TALON_TIMEOUT);
+        leftMotor.config_kP(0, Constants.shooterConstants.kD, Constants.shooterConstants.TALON_TIMEOUT);
         rightMotor.follow(leftMotor);
         rightMotor.setInverted(TalonFXInvertType.OpposeMaster);
     }
