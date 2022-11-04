@@ -15,4 +15,10 @@ public final class Ports {
         public static final int RIGHT_MOTOR=0;
     }
 
+    public static class SwervePorts{
+        public static final int DRIVE_MOTOR=0;
+        public static final int ANGLE_MOTOR=0;
+        public static final boolean FALCON_INVERTED_DRIVE=false;
+        public static final boolean RED_LINE_INVERTED_ANGLE=true;
+    }
 }
