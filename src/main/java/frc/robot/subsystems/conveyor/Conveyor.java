@@ -10,9 +10,9 @@ public class Conveyor extends SubsystemBase {
     private final WPI_TalonFX motor = new WPI_TalonFX(Ports.ConveyorPorts.MOTOR);
 
     private Conveyor() {
-        motor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
-        motor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
-        motor.setInverted(Constants.CLOCKWISE);
+        motor.enableVoltageCompensation(Constants.shooterConstants.ENABLE_VOLT_COMP);
+        motor.configVoltageCompSaturation(Constants.shooterConstants.CONFIG_VOLT_COMP);
+        motor.setInverted(Constants.shooterConstants.CLOCKWISE);
     }
 
     public static Conveyor getInstance() {
