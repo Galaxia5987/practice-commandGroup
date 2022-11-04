@@ -13,9 +13,9 @@ public class Intake extends SubsystemBase {
     private final Solenoid piston = new Solenoid(PneumaticsModuleType.CTREPCM, Ports.IntakePorts.PISTON);
 
     private Intake() {
-        motor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
-        motor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
-        motor.setInverted(Constants.CLOCKWISE);
+        motor.configVoltageCompSaturation(Constants.shooterConstants.CONFIG_VOLT_COMP);
+        motor.enableVoltageCompensation(Constants.shooterConstants.ENABLE_VOLT_COMP);
+        motor.setInverted(Constants.shooterConstants.CLOCKWISE);
     }
 
     public static Intake getInstance() {
@@ -35,11 +35,11 @@ public class Intake extends SubsystemBase {
     }
 
     public void closePiston(){
-        piston.set(Constants.PISTON_CLOSE);
+        piston.set(Constants.shooterConstants.PISTON_CLOSE);
     }
 
     public void openPiston(){
-        piston.set(Constants.PISTON_OPEN);
+        piston.set(Constants.shooterConstants.PISTON_OPEN);
     }
 
     public boolean getPistonPosition(){
