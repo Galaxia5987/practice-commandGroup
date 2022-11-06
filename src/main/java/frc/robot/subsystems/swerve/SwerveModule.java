@@ -2,6 +2,7 @@ package frc.robot.subsystems.swerve;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Ports;
@@ -27,6 +28,11 @@ public class SwerveModule extends SubsystemBase {
         angleMotor.config_kP(0, Constants.SwerveConstants.TALON_D, Constants.SwerveConstants.TALON_TIMEOUT);
     }
     public static double getAngle(){
-        return angleMotor.getSelectedSensorPosition();
+        return Math.toRadians(unitModel.toUnits(angleMotor.getSelectedSensorPosition()))/1024;
+    }
+
+    public static void setAngle(double angle){
+        SwerveModuleState desiredState = new SwerveModuleState(0, );
+        angleMotor.set(SwerveModuleState.optimize(angle));
     }
 }
