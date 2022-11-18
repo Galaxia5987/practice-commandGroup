@@ -7,7 +7,8 @@ public final class Ports {
     }
 
     public static class ConveyorPorts{
-        public static final int MOTOR = 0;
+        public static final int BOTTOM_MOTOR = 0;
+        public static final int UPPER_MOTOR = 0;
     }
 
     public static class ShooterPorts{
