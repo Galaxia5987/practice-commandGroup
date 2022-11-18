@@ -15,8 +15,8 @@ public class Shooter extends SubsystemBase {
     private static Shooter INSTANCE;
 
     private Shooter(){
-        leftMotor.configVoltageCompSaturation(Constants.shooterConstants.CONFIG_VOLT_COMP);
-        leftMotor.enableVoltageCompensation(Constants.shooterConstants.ENABLE_VOLT_COMP);
+        leftMotor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
+        leftMotor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
         leftMotor.setInverted(Constants.shooterConstants.CLOCKWISE);
         leftMotor.setNeutralMode(NeutralMode.Coast);
         leftMotor.config_kP(0, Constants.shooterConstants.kP, Constants.shooterConstants.TALON_TIMEOUT);
