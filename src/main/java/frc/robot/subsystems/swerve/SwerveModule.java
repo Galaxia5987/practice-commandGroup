@@ -1,5 +1,6 @@
 package frc.robot.subsystems.swerve;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -39,6 +40,6 @@ public class SwerveModule extends SubsystemBase {
         SwerveModuleState desiredState = new SwerveModuleState(0, desiredAngle);
         Rotation2d currentAngle = new Rotation2d(SwerveModule.getAngle());
         SwerveModuleState optimizedSwerveModuleState= SwerveModuleState.optimize(desiredState, currentAngle);
-        angleMotor.set();
+        angleMotor.setSelectedSensorPosition();
     }
 }
