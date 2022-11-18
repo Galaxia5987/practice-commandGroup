@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake;
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -9,13 +11,13 @@ import frc.robot.Ports;
 
 public class Intake extends SubsystemBase {
     private static Intake INSTANCE;
-    private final WPI_TalonFX motor = new WPI_TalonFX(Ports.IntakePorts.MOTOR);
+    private final TalonSRX motor = new TalonSRX(Ports.IntakePorts.MOTOR);
     private final Solenoid piston = new Solenoid(PneumaticsModuleType.CTREPCM, Ports.IntakePorts.PISTON);
 
     private Intake() {
-        motor.configVoltageCompSaturation(Constants.shooterConstants.CONFIG_VOLT_COMP);
-        motor.enableVoltageCompensation(Constants.shooterConstants.ENABLE_VOLT_COMP);
-        motor.setInverted(Constants.shooterConstants.CLOCKWISE);
+        motor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
+        motor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
+        motor.setInverted(Constants.CLOCKWISE);
     }
 
     public static Intake getInstance() {
@@ -27,19 +29,19 @@ public class Intake extends SubsystemBase {
     }
 
     public double getPower(){
-        return motor.get();
+        return motor.getMotorOutputPercent();
     }
 
     public void setPower(double value){
-        motor.set(value);
+        motor.set(TalonSRXControlMode.PercentOutput, value);
     }
 
     public void closePiston(){
-        piston.set(Constants.shooterConstants.PISTON_CLOSE);
+        piston.set(Constants.intakeConstants.PISTON_CLOSE);
     }
 
     public void openPiston(){
-        piston.set(Constants.shooterConstants.PISTON_OPEN);
+        piston.set(Constants.intakeConstants.PISTON_OPEN);
     }
 
     public boolean getPistonPosition(){
