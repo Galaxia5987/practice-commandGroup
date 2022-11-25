@@ -41,7 +41,7 @@ public final class Constants {
         public static final double TALON_P = 0;
         public static final double TALON_I = 0;
         public static final double TALON_D = 0;
-        public static final double TICKS_PER_ROTATION = 1024;
+        public static final double ANGLE_MOTOR_TICKS_PER_ROTATION = 1024;
 
 
     }
