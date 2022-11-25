@@ -12,8 +12,8 @@ import frc.robot.Ports;
 import frc.robot.subsystems.UnitModel;
 
 public class SwerveModule extends SubsystemBase {
-    private static final UnitModel unitModel = new UnitModel(Constants.SwerveConstants.TICKS_PER_ROTATION);
-    private final WPI_TalonFX driveMotor = new WPI_TalonFX(Ports.SwervePorts.DRIVE_MOTOR);
+    private static final UnitModel angleUnitModel = new UnitModel(Constants.SwerveConstants.ANGLE_MOTOR_TICKS_PER_ROTATION);
+    private static final WPI_TalonFX driveMotor = new WPI_TalonFX(Ports.SwervePorts.DRIVE_MOTOR);
     private static final WPI_TalonSRX angleMotor = new WPI_TalonSRX(Ports.SwervePorts.ANGLE_MOTOR);
 
     public SwerveModule(){
@@ -30,16 +30,38 @@ public class SwerveModule extends SubsystemBase {
         angleMotor.configVoltageCompSaturation(Constants.SwerveConstants.CONFIG_VOLT_COMP);
         angleMotor.setInverted(Ports.SwervePorts.RED_LINE_INVERTED_ANGLE);
     }
-    public static double getAngle(){
-        return Math.toRadians(unitModel.toUnits(angleMotor.getSelectedSensorPosition()))/1024;
-    }
-    
 
-    public static void setAngle(double angle){
-        Rotation2d desiredAngle = Rotation2d.fromDegrees(angle);
-        SwerveModuleState desiredState = new SwerveModuleState(0, desiredAngle);
-        Rotation2d currentAngle = new Rotation2d(SwerveModule.getAngle());
-        SwerveModuleState optimizedSwerveModuleState= SwerveModuleState.optimize(desiredState, currentAngle);
-        angleMotor.setSelectedSensorPosition();
+    public static double getAngle(){
+        return Math.toRadians(angleUnitModel.toUnits(angleMotor.getSelectedSensorPosition()))/1024;
+    }
+
+    public static void setAngle(Rotation2d angle){
+        Rotation2d error = angle.minus(Rotation2d.fromDegrees(getAngle()));
+        angleMotor.set(ControlMode.MotionMagic, angleMotor.getSelectedSensorPosition()+angleUnitModel.toTicks(error.getRadians()));
+    }
+
+    public static void setVelocity(double velocity){
+        driveMotor.set(velocity);
+    }
+
+    public static double getVelocity(){
+        return driveMotor.get();
+    }
+
+    public static void setState(SwerveModuleState state){
+        Rotation2d currentAngle = Rotation2d.fromDegrees(SwerveModule.getAngle());
+        SwerveModuleState.optimize(state, currentAngle);
+    }
+
+    public static SwerveModuleState getState(){
+        return new SwerveModuleState(getVelocity(), Rotation2d.fromDegrees(getAngle()));
+    }
+
+    public static void stopAngleMotor(){
+        angleMotor.stopMotor();
+    }
+
+    public static void stopDriveMotor(){
+        driveMotor.stopMotor();
     }
 }
