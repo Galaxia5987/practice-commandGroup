@@ -21,5 +21,13 @@ public final class Ports {
         public static final int ANGLE_MOTOR=0;
         public static final boolean FALCON_INVERTED_DRIVE=false;
         public static final boolean RED_LINE_INVERTED_ANGLE=true;
+        public static final int FL_DRIVE_MOTOR=0;
+        public static final int FL_ANGLE_MOTOR=0;
+        public static final int FR_DRIVE_MOTOR=0;
+        public static final int FR_ANGLE_MOTOR=0;
+        public static final int RL_DRIVE_MOTOR=0;
+        public static final int RL_ANGLE_MOTOR=0;
+        public static final int RR_DRIVE_MOTOR=0;
+        public static final int RR_ANGLE_MOTOR=0;
     }
 }
