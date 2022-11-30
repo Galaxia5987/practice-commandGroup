@@ -45,4 +45,14 @@ public final class Constants {
 
 
     }
+
+    public static final class HelicopterConstants{
+        public static final double GEAR_RATIO=292.1;
+        public static final double TICKS_PER_RAD = 2048 * GEAR_RATIO / (2 * Math.PI);
+        public static final double TICKS_PER_RAD_ABSOLUTE = 1 / (2 * Math.PI);
+        public static final TalonFXInvertType CLOCK_WISE = TalonFXInvertType.Clockwise;
+        public static final TalonFXInvertType COUNTER_CLOCK_WISE = TalonFXInvertType.CounterClockwise;
+        public static final double CRUISE_VELOCITY = 0; // [ticks/100ms]
+        public static final double MAXIMAL_ACCELERATION = 0; // [ticks/100ms*sec]
+    }
 }
