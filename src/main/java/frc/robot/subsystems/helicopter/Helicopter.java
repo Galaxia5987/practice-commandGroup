@@ -50,6 +50,13 @@ public class Helicopter extends SubsystemBase {
     }
 
     public static void setPosition(Rotation2d position){
-        mainMotor.set(ControlMode.Position, position.getRadians());
+        Rotation2d currentPosition = getPosition();
+        Rotation2d error = position.minus(currentPosition);
+        Rotation2d moveMin = new Rotation2d(Math.IEEEremainder(unitModel.toTicks(error.getRadians()), Math.PI * 2));
+        mainMotor.set(ControlMode.MotionMagic, unitModel.toTicks(moveMin.getRadians()));
+    }
+
+    public static void stop(){
+        mainMotor.stopMotor();
     }
 }
