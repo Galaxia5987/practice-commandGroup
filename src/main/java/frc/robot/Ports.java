@@ -30,4 +30,9 @@ public final class Ports {
         public static final int RR_DRIVE_MOTOR=0;
         public static final int RR_ANGLE_MOTOR=0;
     }
+
+    public static class HelicopterPorts{
+        public static final int MAIN_MOTOR=0;
+        public static final int AUX_MOTOR=0;
+    }
 }
