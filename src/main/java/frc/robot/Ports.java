@@ -34,5 +34,6 @@ public final class Ports {
     public static class HelicopterPorts{
         public static final int MAIN_MOTOR=0;
         public static final int AUX_MOTOR=0;
+        public static final boolean SENSOR_PHASE=true;
     }
 }
