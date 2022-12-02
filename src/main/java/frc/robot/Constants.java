@@ -56,4 +56,10 @@ public final class Constants {
         public static final double MAXIMAL_ACCELERATION = 0; // [ticks/100ms*sec]
         public static final double DEAD_BEND = 0.05;
     }
+
+    public static final class VisionConstants{
+        public static final double CAMERA_PITCH = 34.67; //[deg]
+        public static final double TARGET_HEIGHT = 2.64; //[m]
+        public static final double CAMERA_HEIGHT = 0.79; //[m]
+    }
 }
