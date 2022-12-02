@@ -11,8 +11,8 @@ import frc.robot.subsystems.UnitModel;
 
 public class Helicopter extends SubsystemBase {
     private static Helicopter INSTANCE = null;
-    private static final WPI_TalonFX mainMotor = new WPI_TalonFX(Ports.HelicopterPorts.MAIN_MOTOR);
-    private static final WPI_TalonFX auxMotor = new WPI_TalonFX(Ports.HelicopterPorts.AUX_MOTOR);
+    private final WPI_TalonFX mainMotor = new WPI_TalonFX(Ports.HelicopterPorts.MAIN_MOTOR);
+    private final WPI_TalonFX auxMotor = new WPI_TalonFX(Ports.HelicopterPorts.AUX_MOTOR);
     private static final UnitModel unitModel = new UnitModel(Constants.HelicopterConstants.TICKS_PER_RAD);
 
     private Helicopter(){
@@ -30,33 +30,38 @@ public class Helicopter extends SubsystemBase {
         mainMotor.configMotionAcceleration(Constants.HelicopterConstants.MAXIMAL_ACCELERATION);
     }
 
-    public static Helicopter getInstance(){
+    public Helicopter getInstance(){
         if (INSTANCE==null){
             INSTANCE = new Helicopter();
         }
         return INSTANCE;
     }
 
-    public static double getPower(){
+    public double getPower(){
         return mainMotor.getMotorOutputPercent();
     }
 
-    public static void setPower(double power){
+    public void setPower(double power){
         mainMotor.set(ControlMode.PercentOutput, power);
     }
 
-    public static Rotation2d getPosition(){
+    public Rotation2d getPosition(){
         return new Rotation2d(Math.IEEEremainder(unitModel.toUnits(mainMotor.getSelectedSensorPosition()), Math.PI*2));
     }
 
-    public static void setPosition(Rotation2d position){
+    public void setPosition(Rotation2d position){
         Rotation2d currentPosition = getPosition();
         Rotation2d error = position.minus(currentPosition);
         Rotation2d moveMin = new Rotation2d(Math.IEEEremainder(unitModel.toTicks(error.getRadians()), Math.PI * 2));
         mainMotor.set(ControlMode.MotionMagic, unitModel.toTicks(moveMin.getRadians()));
     }
 
-    public static void stop(){
+    public double deadBend(double value){
+        if (value<=Constants.HelicopterConstants.DEAD_BEND) return 0;
+        else return value;
+    }
+
+    public void stop(){
         mainMotor.stopMotor();
     }
 }
