@@ -57,7 +57,7 @@ public class Helicopter extends SubsystemBase {
     }
 
     public double deadBend(double value){
-        if (value<=Constants.HelicopterConstants.DEAD_BEND) return 0;
+        if (value<=Math.abs(Constants.HelicopterConstants.DEAD_BEND)) return 0;
         else return value;
     }
 
