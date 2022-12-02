@@ -54,5 +54,6 @@ public final class Constants {
         public static final TalonFXInvertType COUNTER_CLOCK_WISE = TalonFXInvertType.CounterClockwise;
         public static final double CRUISE_VELOCITY = 0; // [ticks/100ms]
         public static final double MAXIMAL_ACCELERATION = 0; // [ticks/100ms*sec]
+        public static final double DEAD_BEND = 0.05;
     }
 }
