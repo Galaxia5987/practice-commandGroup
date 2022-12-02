@@ -21,13 +21,12 @@ public class TestPiston extends CommandBase {
 
     @Override
     public void execute() {
-            if (timer.get()>2){
-                if (!intake.getPistonPosition()){
-                    intake.openPiston();
-                }
-                else{
-                    intake.closePiston();
-                }
+        if (timer.get() > 2) {
+            if (!intake.getPistonPosition()) {
+                intake.openPiston();
+            } else {
+                intake.closePiston();
             }
+        }
     }
 }

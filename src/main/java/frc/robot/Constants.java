@@ -3,7 +3,6 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import frc.robot.valuetuner.WebConstant;
 
 public final class Constants {
     public static final int CONFIG_VOLT_COMP = 10;
@@ -31,7 +30,7 @@ public final class Constants {
         public static final double CONVEYOR_POWER = 0.5;
     }
 
-    public static final class SwerveConstants{
+    public static final class SwerveConstants {
         public static final int CONFIG_VOLT_COMP = 10;
         public static final boolean ENABLE_VOLT_COMP = true;
         public static final int TALON_TIMEOUT = 10;//[ms]
@@ -46,8 +45,8 @@ public final class Constants {
 
     }
 
-    public static final class HelicopterConstants{
-        public static final double GEAR_RATIO=292.1;
+    public static final class HelicopterConstants {
+        public static final double GEAR_RATIO = 292.1;
         public static final double TICKS_PER_RAD = 2048 * GEAR_RATIO / (2 * Math.PI);
         public static final double TICKS_PER_RAD_ABSOLUTE = 1 / (2 * Math.PI);
         public static final TalonFXInvertType CLOCK_WISE = TalonFXInvertType.Clockwise;
@@ -57,7 +56,7 @@ public final class Constants {
         public static final double DEAD_BEND = 0.05;
     }
 
-    public static final class VisionConstants{
+    public static final class VisionConstants {
         public static final double CAMERA_PITCH = 34.67; //[deg]
         public static final double TARGET_HEIGHT = 2.64; //[m]
         public static final double CAMERA_HEIGHT = 0.79; //[m]

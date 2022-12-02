@@ -2,7 +2,6 @@ package frc.robot.subsystems.conveyor;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Ports;
@@ -38,7 +37,7 @@ public class Conveyor extends SubsystemBase {
         return upperMotor.getMotorOutputPercent();
     }
 
-    public void setUpperPower(double power){
+    public void setUpperPower(double power) {
         upperMotor.set(TalonSRXControlMode.PercentOutput, power);
     }
 }

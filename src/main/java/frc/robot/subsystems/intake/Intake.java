@@ -2,7 +2,6 @@ package frc.robot.subsystems.intake;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -28,23 +27,23 @@ public class Intake extends SubsystemBase {
         return INSTANCE;
     }
 
-    public double getPower(){
+    public double getPower() {
         return motor.getMotorOutputPercent();
     }
 
-    public void setPower(double value){
+    public void setPower(double value) {
         motor.set(TalonSRXControlMode.PercentOutput, value);
     }
 
-    public void closePiston(){
+    public void closePiston() {
         piston.set(Constants.intakeConstants.PISTON_CLOSE);
     }
 
-    public void openPiston(){
+    public void openPiston() {
         piston.set(Constants.intakeConstants.PISTON_OPEN);
     }
 
-    public boolean getPistonPosition(){
+    public boolean getPistonPosition() {
         return piston.get();
     }
 }
