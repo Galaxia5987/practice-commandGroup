@@ -1,4 +1,6 @@
 package frc.robot.subsystems.commandgroups;
 
-public class ShootCargo extends {
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+public class ShootCargo extends SequentialCommandGroup {
 }
