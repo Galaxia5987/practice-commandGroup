@@ -158,5 +158,10 @@ public class Shooter extends SubsystemBase {
         angleMotor.set(ControlMode.MotionMagic, angleMotor.getSelectedSensorPosition() + unitModel.toTicks(error.getRadians()));
     }
 
+    public void terminate(){
+        angleMotor.stopMotor();
+        velocityMotor.stopMotor();
+    }
+
 
 }
