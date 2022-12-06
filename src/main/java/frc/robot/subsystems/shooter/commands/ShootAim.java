@@ -1,5 +1,6 @@
 package frc.robot.subsystems.shooter.commands;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.vision.Vision;
@@ -18,6 +19,12 @@ public class ShootAim extends CommandBase {
     public void execute() {
         shooter.rangeFinderRpm(vision.getDistance().getAsDouble());
         shooter.rangeFinderAngle(vision.getDistance().getAsDouble());
+        shooter.setAngle(new Rotation2d(shooter.angleFinder(vision.getDistance().getAsDouble())));
         shooter.setVelocity(shooter.rpmFinder(vision.getDistance().getAsDouble()));
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooter.terminate();
     }
 }
