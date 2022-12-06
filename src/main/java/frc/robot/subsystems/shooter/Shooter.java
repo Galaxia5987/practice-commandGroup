@@ -1,16 +1,18 @@
 package frc.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.subsystems.UnitModel;
 
 public class Shooter extends SubsystemBase {
-    private final WPI_TalonFX leftMotor = new WPI_TalonFX(Ports.ShooterPorts.LEFT_MOTOR);
-    private final WPI_TalonFX rightMotor = new WPI_TalonFX(Ports.ShooterPorts.RIGHT_MOTOR);
+    private final WPI_TalonFX velocityMotor = new WPI_TalonFX(Ports.ShooterPorts.VELOCITY_MOTOR);
+    private final WPI_TalonFX angleMotor = new WPI_TalonFX(Ports.ShooterPorts.ANGLE_MOTOR);
     private final UnitModel unitModel = new UnitModel(Constants.shooterConstants.TICKS_PER_ROTATION);
     private static Shooter INSTANCE;
     public static int indexRpm;
@@ -29,15 +31,15 @@ public class Shooter extends SubsystemBase {
     };
 
     private Shooter(){
-        leftMotor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
-        leftMotor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
-        leftMotor.setInverted(Constants.shooterConstants.CLOCKWISE);
-        leftMotor.setNeutralMode(NeutralMode.Coast);
-        leftMotor.config_kP(0, Constants.shooterConstants.kP, Constants.shooterConstants.TALON_TIMEOUT);
-        leftMotor.config_kP(0, Constants.shooterConstants.kI, Constants.shooterConstants.TALON_TIMEOUT);
-        leftMotor.config_kP(0, Constants.shooterConstants.kD, Constants.shooterConstants.TALON_TIMEOUT);
-        rightMotor.follow(leftMotor);
-        rightMotor.setInverted(TalonFXInvertType.OpposeMaster);
+        velocityMotor.configVoltageCompSaturation(Constants.CONFIG_VOLT_COMP);
+        velocityMotor.enableVoltageCompensation(Constants.ENABLE_VOLT_COMP);
+        velocityMotor.setInverted(Constants.shooterConstants.CLOCKWISE);
+        velocityMotor.setNeutralMode(NeutralMode.Coast);
+        velocityMotor.config_kP(0, Constants.shooterConstants.kP, Constants.shooterConstants.TALON_TIMEOUT);
+        velocityMotor.config_kP(0, Constants.shooterConstants.kI, Constants.shooterConstants.TALON_TIMEOUT);
+        velocityMotor.config_kP(0, Constants.shooterConstants.kD, Constants.shooterConstants.TALON_TIMEOUT);
+        angleMotor.follow(velocityMotor);
+        velocityMotor.setInverted(TalonFXInvertType.OpposeMaster);
     }
 
     public static Shooter getInstance(){
@@ -140,11 +142,20 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setVelocity(double velocity){
-        leftMotor.set(unitModel.toTicks100ms(velocity/60));
+        velocityMotor.set(unitModel.toTicks100ms(velocity/60));
     }
 
     public double getVelocity(){
-        return unitModel.toUnits(leftMotor.get());
+        return unitModel.toUnits(velocityMotor.get());
+    }
+
+    public double getAngle(){
+        return angleMotor.getSelectedSensorPosition();
+    }
+
+    public void setAngle(Rotation2d angle) {
+        Rotation2d error = angle.minus(Rotation2d.fromDegrees(getAngle()));
+        angleMotor.set(ControlMode.MotionMagic, angleMotor.getSelectedSensorPosition() + unitModel.toTicks(error.getRadians()));
     }
 
 
