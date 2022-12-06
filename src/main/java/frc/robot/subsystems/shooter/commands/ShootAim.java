@@ -17,8 +17,6 @@ public class ShootAim extends CommandBase {
 
     @Override
     public void execute() {
-        shooter.rangeFinderRpm(vision.getDistance().getAsDouble());
-        shooter.rangeFinderAngle(vision.getDistance().getAsDouble());
         shooter.setAngle(new Rotation2d(shooter.angleFinder(vision.getDistance().getAsDouble())));
         shooter.setVelocity(shooter.rpmFinder(vision.getDistance().getAsDouble()));
     }
