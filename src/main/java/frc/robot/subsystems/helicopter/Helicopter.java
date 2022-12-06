@@ -30,7 +30,7 @@ public class Helicopter extends SubsystemBase {
         mainMotor.configMotionAcceleration(Constants.HelicopterConstants.MAXIMAL_ACCELERATION);
     }
 
-    public Helicopter getInstance() {
+    public static Helicopter getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Helicopter();
         }

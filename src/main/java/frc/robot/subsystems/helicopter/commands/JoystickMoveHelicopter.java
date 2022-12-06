@@ -9,8 +9,8 @@ public class JoystickMoveHelicopter extends CommandBase {
     private final Helicopter helicopter;
     private final DoubleSupplier joystickValue;
 
-    public JoystickMoveHelicopter(Helicopter helicopter, DoubleSupplier joystickValue) {
-        this.helicopter = helicopter;
+    public JoystickMoveHelicopter(DoubleSupplier joystickValue) {
+        this.helicopter = Helicopter.getInstance();
         this.joystickValue = joystickValue;
         addRequirements(helicopter);
     }
