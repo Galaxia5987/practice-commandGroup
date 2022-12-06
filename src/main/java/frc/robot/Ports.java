@@ -12,8 +12,8 @@ public final class Ports {
     }
 
     public static class ShooterPorts {
-        public static final int LEFT_MOTOR = 0;
-        public static final int RIGHT_MOTOR = 0;
+        public static final int VELOCITY_MOTOR = 0;
+        public static final int ANGLE_MOTOR = 0;
     }
 
     public static class SwervePorts {
