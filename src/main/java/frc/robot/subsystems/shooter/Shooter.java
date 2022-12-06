@@ -46,9 +46,103 @@ public class Shooter extends SubsystemBase {
         }
         return INSTANCE;
     }
+
+    /**
+     * checks where is the entered distance relative to the values in rpmDistanceList
+     * @param distance
+     * @return
+     */
+    public static int rangeFinderRpm(double distance){
+        int i =0;
+        while ( rpmDistanceList.length>i){
+            if (distance<rpmDistanceList[i]){
+                indexRpm = i;
+                return indexRpm;
+            }
+            else if (distance==rpmDistanceList[i]){
+                indexRpm = i;
+                return indexRpm;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    /**
+     * finds the correct rpm for a certain distance
+     * @param distance
+     * @return
+     */
+    public static double rpmFinder(double distance){
+        double rpm;
+        if (distance<2.4){
+            return rpmList[0];
+        }
+        else if(distance>4.8){
+            return rpmList[11];
+        }
+        else if(distance==rpmDistanceList[indexRpm]){
+            return rpmList[indexRpm];
+        }
+        else if (distance<rpmDistanceList[indexRpm]&&distance>rpmDistanceList[indexRpm-1]){
+            rpm = ((rpmList[indexRpm]-rpmList[indexRpm-1])/(rpmDistanceList[indexRpm]-rpmDistanceList[indexRpm-1])*(distance-rpmDistanceList[indexRpm])+rpmList[indexRpm]);
+            return rpm;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    /**
+     * checks where is the entered distance relative to the values in angleDistanceList
+     * @param distance
+     * @return
+     */
+    public static int rangeFinderAngle(double distance){
+        int i =0;
+        while (angleDistanceList.length>i){
+            if (distance<angleDistanceList[i]){
+                indexAngle = i;
+                return indexAngle;
+            }
+            else if (distance==angleDistanceList[i]){
+                indexAngle = i;
+                return indexAngle;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    /**
+     * finds the correct angle for a certain distance
+     * @param distance
+     * @return
+     */
+    public static double angleFinder(double distance){
+        double angle;
+        if (distance<1.7){
+            return angleList[0];
+        }
+        else if(distance>5.73){
+            return angleList[21];
+        }
+        else if(distance==angleDistanceList[indexAngle]){
+            return angleList[indexAngle];
+        }
+        else if (distance<angleDistanceList[indexAngle]&&distance>angleDistanceList[indexAngle-1]){
+            angle = ((angleList[indexAngle]-angleList[indexAngle-1])/(angleDistanceList[indexAngle]-angleDistanceList[indexAngle-1])*(distance-angleDistanceList[indexAngle])+angleList[indexAngle]);
+            return angle;
+        }
+        else{
+            return -1;
+        }
+    }
+
     public void setVelocity(double velocity){
         leftMotor.set(unitModel.toTicks100ms(velocity/60));
     }
+
     public double getVelocity(){
         return unitModel.toUnits(leftMotor.get());
     }
