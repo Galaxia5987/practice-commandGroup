@@ -50,33 +50,24 @@ public class Shooter extends SubsystemBase {
     }
 
     /**
-     * checks where is the entered distance relative to the values in rpmDistanceList
-     * @param distance
-     * @return
-     */
-    public static int rangeFinderRpm(double distance){
-        int i =0;
-        while ( rpmDistanceList.length>i){
-            if (distance<rpmDistanceList[i]){
-                indexRpm = i;
-                return indexRpm;
-            }
-            else if (distance==rpmDistanceList[i]){
-                indexRpm = i;
-                return indexRpm;
-            }
-            i++;
-        }
-        return -1;
-    }
-
-    /**
      * finds the correct rpm for a certain distance
      * @param distance
      * @return
      */
     public static double rpmFinder(double distance){
         double rpm;
+
+        int i =0;
+        while ( rpmDistanceList.length>i){
+            if (distance<rpmDistanceList[i]){
+                indexRpm = i;
+            }
+            else if (distance==rpmDistanceList[i]){
+                indexRpm = i;
+            }
+            i++;
+        }
+
         if (distance<2.4){
             return rpmList[0];
         }
@@ -96,33 +87,24 @@ public class Shooter extends SubsystemBase {
     }
 
     /**
-     * checks where is the entered distance relative to the values in angleDistanceList
-     * @param distance
-     * @return
-     */
-    public static int rangeFinderAngle(double distance){
-        int i =0;
-        while (angleDistanceList.length>i){
-            if (distance<angleDistanceList[i]){
-                indexAngle = i;
-                return indexAngle;
-            }
-            else if (distance==angleDistanceList[i]){
-                indexAngle = i;
-                return indexAngle;
-            }
-            i++;
-        }
-        return -1;
-    }
-
-    /**
      * finds the correct angle for a certain distance
      * @param distance
      * @return
      */
     public static double angleFinder(double distance){
         double angle;
+
+        int i =0;
+        while (angleDistanceList.length>i){
+            if (distance<angleDistanceList[i]){
+                indexAngle = i;
+            }
+            else if (distance==angleDistanceList[i]){
+                indexAngle = i;
+            }
+            i++;
+        }
+
         if (distance<1.7){
             return angleList[0];
         }
