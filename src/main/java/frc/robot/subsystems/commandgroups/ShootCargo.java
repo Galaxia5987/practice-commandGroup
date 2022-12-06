@@ -9,8 +9,8 @@ import frc.robot.subsystems.shooter.commands.Shoot;
 import frc.robot.subsystems.shooter.commands.ShootAim;
 import frc.robot.subsystems.vision.Vision;
 
-public class AimShoot extends SequentialCommandGroup {
-    public AimShoot(Conveyor ConveyUpper, Shooter ShootAim, Vision vision){
+public class ShootCargo extends SequentialCommandGroup {
+    public ShootCargo(Conveyor ConveyUpper, Shooter ShootAim, Vision vision){
         addCommands(
                 new ShootAim(vision.getDistance().getAsDouble()).andThen(
                         new ConveyUpper(Constants.conveyorConstants.CONVEYOR_POWER)
