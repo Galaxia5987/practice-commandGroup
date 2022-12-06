@@ -8,11 +8,12 @@ import frc.robot.subsystems.vision.Vision;
 public class ShootAim extends CommandBase {
     private final Shooter shooter;
     private final Vision vision;
+    private final double distance;
 
-    public ShootAim(Shooter shooter, Vision vision) {
-        this.shooter = shooter.getInstance();
-        this.vision = vision.getInstance();
-        addRequirements(shooter, vision);
+    public ShootAim(double distance) {
+        this.shooter = Shooter.getInstance();
+        this.vision = Vision.getInstance();
+        this.distance = distance;
     }
 
     @Override
