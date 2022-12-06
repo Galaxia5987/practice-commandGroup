@@ -43,22 +43,29 @@ public class SwerveDrive extends SubsystemBase {
         return FIELD_ORIENTED_DRIVE;
     }
 
-    public static Pose2d getPose() {
+    public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
 
-    public static void resetOdometry() {
+    public void resetOdometry() {
         odometry.resetPosition(new Pose2d(), new Rotation2d());
     }
 
-    public static void setPower(double power) {
+    public void setDrivePower(double power) {
         FL_DRIVE_MOTOR.set(power);
         FR_DRIVE_MOTOR.set(power);
         RL_DRIVE_MOTOR.set(power);
         RR_DRIVE_MOTOR.set(power);
     }
 
-    public static void terminate() {
+    public void setAnglePower(double power){
+        FL_ANGLE_MOTOR.set(power);
+        FR_ANGLE_MOTOR.set(power);
+        RL_ANGLE_MOTOR.set(power);
+        RR_ANGLE_MOTOR.set(power);
+    }
+
+    public void terminate() {
         FL_DRIVE_MOTOR.set(0);
         FR_DRIVE_MOTOR.set(0);
         RL_DRIVE_MOTOR.set(0);
