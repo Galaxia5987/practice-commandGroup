@@ -24,6 +24,7 @@ public class ShootAim extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        shooter.setAngle(new Rotation2d(0));
         shooter.terminate();
     }
 }
